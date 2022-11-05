@@ -1,0 +1,171 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Integer Spiral Case Solution Documentation",
+        "description": "Gökhan Uçar - Integral Spiral Api Case Solution",
+        "contact": {
+            "email": "gokhanucar@outlook.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/layouts": {
+            "get": {
+                "tags": [
+                    "Layouts"
+                ],
+                "summary": "List all layouts",
+                "description": "List all layouts including data (x, y, layoutId)",
+                "operationId": "getLayouts",
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Layouts"
+                ],
+                "summary": "Create new layout record",
+                "description": "Create two dimensional layout record with spiral algorithm. Returns layout id",
+                "operationId": "createLayout",
+                "requestBody": {
+                    "description": "Two dimensional layout to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "x": {
+                                        "description": "Column count of layout",
+                                        "type": "integer"
+                                    },
+                                    "y": {
+                                        "description": "Row count of layout",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Operation"
+                    },
+                    "412": {
+                        "description": "Bad request with invalid arguments"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/layouts/value/{layoutId}": {
+            "get": {
+                "tags": [
+                    "Layouts"
+                ],
+                "summary": "Get value of given coordinates from specified layout",
+                "description": "NOTE THAT the starting indices of both rows and columns are zero",
+                "operationId": "getValue",
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "in": "path",
+                        "description": "Layout id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "x",
+                        "in": "query",
+                        "description": "Column coordinate (starting with zero)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "y",
+                        "in": "query",
+                        "description": "Row coordinate (starting with zero)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "412": {
+                        "description": "Bad request with invalid arguments"
+                    },
+                    "404": {
+                        "description": "Model Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/layouts/{id}": {
+            "get": {
+                "tags": [
+                    "Layouts"
+                ],
+                "summary": "Fetch single layout record by layoutId",
+                "description": "Fetch single layout record with decoded output data by layoutId",
+                "operationId": "getLayout",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Layout id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "404": {
+                        "description": "Model Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Layouts",
+            "description": "API Endpoints of Layouts"
+        }
+    ]
+}
