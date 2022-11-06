@@ -164,8 +164,8 @@ class LayoutController extends ApiController
         $params = $request->query();
 
         $validator = Validator::make($params, [
-            'x' => 'required|integer|min:1',
-            'y' => 'required|integer|min:1'
+            'x' => 'required|integer|min:0',
+            'y' => 'required|integer|min:0'
         ]);
 
         try {
